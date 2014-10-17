@@ -48,7 +48,13 @@ Pinhole camera
   	- Cn = 0
   - Internal/external parameters;
 	
-  - K = f y u; 0 f v; 0 0 1; (matrix) 
+ K = 
+
+| f | y | u |
+| ----- | ----- |-----|
+| 0  | f  | v  |
+| 0  | 0  | 1  |
+  
   - (R t)
  
 * Equivalent cameras
