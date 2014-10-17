@@ -37,9 +37,9 @@ Lecture 1c:
 ==
 
 * Homogeneous coordinates of 3D points
-  – How to determine the 3D coordinates from a projective element
+  - How to determine the 3D coordinates from a projective element
 * Dual homogeneous coordinates of 3D planes
-  – How to determine the parameters of the plane from a projective element
+  - How to determine the parameters of the plane from a projective element
 * Points, planes, and lines at infinity
 * Parametric representation of 3D line
 * Plücker coordinates of 3D line, including dual Plücker coordinates, the duality mapping
@@ -49,17 +49,17 @@ Lecture 1c:
 * How to determine the intersecting plane of a point x and line L
 * The principle of duality
 * Different cases of 3D transformations and their representations in terms of matrices
-  – Translation, rotation
-  – Rigid transformations
-  – Scaling transformations
-  – Affine transformations
+  - Translation, rotation
+  - Rigid transformations
+  - Scaling transformations
+  - Affine transformations
 * The pinhole camera model
-  – Can be represented as a 3 × 4 matrix C that maps 3D points to 2D image points
-  – Virtual image plane
-  – Internal and external parameters, their geometric interpretation
-  – How to decompose C into internal and external parameters
-  – Normalized camera
-  – Cameracentern,Cn=0
+  - Can be represented as a 3 × 4 matrix C that maps 3D points to 2D image points
+  - Virtual image plane
+  - Internal and external parameters, their geometric interpretation
+  - How to decompose C into internal and external parameters
+  - Normalized camera
+  - Cameracentern,Cn=0
 
 
 Lecture 1d:
@@ -83,9 +83,10 @@ Lectrue 1e:
 * EVD of anti‐symmetric matrices
 * EVD of rotation matrices
 * The result of making a singular value decomposition of m × n real matrix A
-  – Anm×morthogonalmatrixU
-  – Anm×ndiagonalmatrixS(non‐negative) – Ann×northogonalmatrixV
-  – SuchthatA=USVT
+  - An m×m orthogonal matrix U
+  - An m×n diagonalmatrix S(non‐negative) 
+  - An n×n orthogonal matrix V
+  - Such that A=USVT
 * Definition of singular values and singular vectors
 * How to use SVD to solve homogeneous equations:
   Ax=0
@@ -103,8 +104,8 @@ Lecture 1f:
   dependent matrix and x is the unknown.
 
 * A is affected by noise
-  -Measurement noise
-  -Image noise, etc.
+  - Measurement noise
+  - Image noise, etc.
 
 * The noise appears in the 2D image
   - Or in the coordinates of the 3D points
@@ -114,20 +115,20 @@ Lecture 1f:
   - Under reasonable assumptions: Maximum likelihood estimates.
 
 * In general: leads to solving non-linear equations
-  -Iterative methods are necessary
-  -Exception: point/line intersections in 2D
+  - Iterative methods are necessary
+  - Exception: point/line intersections in 2D
 
 * Instead we can minimise algebraic errors, ||Ax||, defined in the embedding
   space of the homogeneous coordinates.
-  -In general: these have no geometric interpretation in the corresponding Euclidean
+  - In general: these have no geometric interpretation in the corresponding Euclidean
   space.
 
 * Depending on which constraint we use for x:
-  -inhomogeneous method.
-  -homogeneous method
-    *Characterises the solution (unique/not unique, exists or not)
-    *Hartley normalisation
-    *Computationally more complex then the inhom. method.
+  - inhomogeneous method.
+  - homogeneous method
+    * Characterises the solution (unique/not unique, exists or not)
+    * Hartley normalisation
+    * Computationally more complex then the inhom. method.
 
 Lecture 1g:
 ==
@@ -137,6 +138,6 @@ Lecture 1g:
   rotation matrix R
 * How to represent a 3D rotation in terms of a
   vector and an angle (n, α)
-* Rodrigues’formulathatrelatesthetwo
-* Howthematrixexponentialmaprelatesso(3) with SO(3)
+* Rodrigues’formula that relates the two
+* How the matrix exponential map relates so(3) with SO(3)
 * How to represent 3D rotations with unit quaternions
