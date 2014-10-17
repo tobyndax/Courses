@@ -73,8 +73,8 @@ Lecture 1d:
 * A homography relates the images taken from a single view point (equivalent cameras)
 * Difference between geometric and algebraic error
 * Direct Linear Transformation
-  – Appliedtotheproblemofestimatingahomography
-  – Minimumnumberofcorrespondingpointpairs=4,andwhy
+  - Applied to the problem of estimating a homography
+  - Minimum number of corresponding point pairs = 4, and why
 * How DLT is applied to the problem of estimating a homography
 
 Lectrue 1e:
