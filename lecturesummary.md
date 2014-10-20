@@ -95,8 +95,7 @@ Estimation
 	- Different options for the error function exist.
 
 * Geometric error. 
-	The most common error function is based around the idea of minimizing
-	  distances.
+	The most common error function is based around the idea of minimizing distances.
 
 	- This can lead to nonlinear equations and typically these are hard to
 	  minimize. Complex optimizations and good first guess needed. i.e. much more 		  advanced methods needed.
@@ -104,7 +103,9 @@ Estimation
 * Algebraic error. ( e = |Az|^2 ) ; A = data, z = model parameters. 
 	Much less intuitive than the geometric error but much easier to minimize. 
 
-	 - x*p=0, y*l=0, L*x = 0, if the point is on the plane, line etc.
+	 - x*p=0 
+	 - yl=0 
+	 - L*x = 0, if the point is on the plane, line etc.
 	 
 	 - Each point of data can give one row in A. With the addition of the noise
 	  we can no longer get the error to be zero, but we can now minimize the norm
