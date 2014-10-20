@@ -47,16 +47,7 @@ Pinhole camera
   - Camera matrix
   	- Cn = 0
   - Internal/external parameters;
-	
- K = 
 
-| f | y | u |
-| ----- | ----- |-----|
-| 0  | f  | v  |
-| 0  | 0  | 1  |
-  
-  - (R t)
- 
 * Equivalent cameras
  - 2 images of a single plane
  - points in a one image could be transformed by a simple homography, due to constricted to a single plane. 
