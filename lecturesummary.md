@@ -49,14 +49,12 @@ Pinhole camera
 
 3D rotations SO(3)
 ==
-  
  - Matrix rep: R € SO(3) => R’R = I and det(R) = ±1
  - Angle rep: (a,n)
 	* intuitive but contains a singularity at R = I.
 	in that case n is not well defined. (uniquely). 
 	* (-a,-n) is equivalent to (a,n), multiple values
 	* a and a + 2pi*k equivalent. 
-	
    - Rodrigues formula, (n,a) => R 
    - Unit quaternions q€H ; |q| = 1; q = (cos(a/2), sin(a/2)*n) (4-dim). 
 	prot =-qxq^(-1);  where p_x is a pure quaternion. 
