@@ -9,6 +9,7 @@ Representation
 * Point and line at inf
 
 * Transformations (3x3 matrices)
+* Dual Transformations
 * Affine (parallell lines stay parallell)
 	- Rigid transformations ( rot + translation)
 	- Similarity transformations( Rigid + scaling)
@@ -26,6 +27,7 @@ Representation
 * Plucker coord for lines.
 
 * Affine transformations and Homographies
+* Dual Transformations
 
 Distances
 ==
@@ -115,6 +117,12 @@ Estimation
 		- By changing the coordinate system before optimizing the profile gets more distinct.
 		- How it is done. 
 		- A scaling and a translation (specific)
+
+
+
+* MLE - Maximum Likelihood Estimation
+* DLT - Direct Linear Transformation
+
 
 Matrix exp 
 ==
