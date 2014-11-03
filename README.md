@@ -1,5 +1,11 @@
-TSBB06
+Courses
 ======
 
-Multidimensional Signal Analysis.
-And notes concerning this course taken at Linköping University
+Labcode and notes for the following courses taken at Linköping University
+
+
+TSBB06 Multidimensional Signal Analysis.
+
+TSBB09 Image Sensors
+
+TSRT78 Digital Signal Processing
