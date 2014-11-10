@@ -58,7 +58,7 @@ for k =1:3
     im1(:,:,k) = conv2(bk.*mask1,kern,'same');
     im2(:,:,k) = conv2(bk.*mask2,kern,'same');
 end
-
+figure;
 imshow(im1);
 figure;
 imshow(im2);
@@ -194,7 +194,7 @@ imshow(raw2rgb(imv)*10000);
 
 S = imp;
 N = imv;
-
+figure;
 SNR = N./S;
 imshow(SNR*1000);
 

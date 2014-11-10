@@ -14,7 +14,7 @@ f = c.*(origimage+d);
 imagesc(f, [0 255]);
 axis image;
 axis off;
-colormap(jet);
+colormap(gray);
 
 end
 
