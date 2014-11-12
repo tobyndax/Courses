@@ -24,7 +24,7 @@ plot(2*pi/N*(0:N/p-1),abs(Xd));
 
 
 %%
-load('/Users/Jens/Programmering/Courses/TSRT78/CourseLib/sig30.mat')
+load('CourseLib/sig30.mat')
 
 figure;
 N = 100;
@@ -36,7 +36,7 @@ plot(2*pi/N*(0:N-1),abs(Y))
 
 
 %%
-load('/Users/Jens/Programmering/Courses/TSRT78/CourseLib/sig40.mat')
+load('CourseLib/sig40.mat')
 figure;
 subplot(221);
 plot(abs(fft(s2)));
@@ -47,8 +47,8 @@ plot(abs(fft(s1)));
 %s should be able to be split into two by using a highpass filter and a
 %lowpass filter with it's cutoff placed inbetween the peaks in s1 and s2
 
-[b1, a1] = butter(10,(0.1+0.5)/8,'high');
-[b2, a2] = butter(10,(0.1+0.5)/8,'low');
+[b1, a1] = butter(10,(0.1+0.5)/2/pi,'high'); %normalized cutoff freq times 2. 
+[b2, a2] = butter(10,(0.1+0.5)/2/pi,'low');
 
 %%why does this with wf = 0.15 work so good?
 
@@ -67,7 +67,7 @@ plot(abs(fft(s4)));
 %%
 close all;
 figure;
-load('/Users/Jens/Programmering/Courses/TSRT78/CourseLib/soderasen.mat')
+load('CourseLib/soderasen.mat')
 
 fs = 1000;
 T = 1/fs;
