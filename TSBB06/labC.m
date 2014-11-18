@@ -39,7 +39,7 @@ subplot(3,1,2);plot(c(2,:))
 subplot(3,1,3);plot(c(3,:))
 
 %% 4
-cert = double(rand(1,101)>0.2);
+cert = double(rand(1,101)>0.40);
 scert = s.*cert;
 figure(5);plot(scert);
 
@@ -58,3 +58,41 @@ figure(4);
 subplot(3,1,1);plot(c(1,:))
 subplot(3,1,2);plot(c(2,:))
 subplot(3,1,3);plot(c(3,:))
+
+
+f12 = b0.*a.*b1; f12 = f12(end:-1:1);
+f11 = b0.*a.*b0; f11 = f11(end:-1:1);
+f22 = b1.*a.*b1; f22 = f22(end:-1:1);
+G11 = conv(cert,f11,'same');% <- f(a,c,b0,b0) what?!
+G12 = conv(cert,f12,'same');% <- f(a,c,b1,b0)
+G22 = conv(cert,f22,'same');%;conv(...); <- f(a,c,b1,b1)
+
+
+detG = G11.*G22-G12.^2;
+c0 = (G22.*h0-G12.*h1)./detG;
+c1 = (-G12.*h0+G11.*h1)./detG; figure(6);
+subplot(2,1,1);plot(c0)
+subplot(2,1,2);plot(c1)
+
+%%
+
+im = double(imread('Scalespace0.png'));
+figure(7);colormap(gray);imagesc(im);
+
+cert = double(rand(size(im)) > 0.97); imcert = im.*cert;
+figure(8);colormap(gray);imagesc(imcert);
+
+x = ones(23,1)*(-11:11)
+y = x'
+a = exp(-(x.^2+y.^2)/4);
+figure(9);mesh(a);
+
+
+imlp = conv2(imcert, a, 'same');
+figure(10);colormap(gray);imagesc(imlp);
+
+G = conv2(cert,a,'same');
+
+c = imlp./G;
+minG = min(min(G))
+figure(12);colormap(gray);imagesc(c);
