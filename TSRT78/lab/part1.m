@@ -29,18 +29,33 @@ w=1/(N*T)*(0:N-1);
 
 figure;
 plot(w,abs(Wfilt));
-
-wpow = sum(whist.^2)/N
-wfiltpow = sum(wfilt.^2)/N
+%This is power. We want energy. Drop a N, mayhaps?
+wpow = sum(whist.^2)
+wfiltpow = sum(wfilt.^2)
 
 purity = 1 - wfiltpow/wpow
 
 %%
 
-Wpow = sum(abs(W).^2)/N^2
-WpowBand = sum(abs(Wfilt).^2)/N^2
+Wpow = sum(abs(W).^2)/N
+WpowBand = sum(abs(Wfilt).^2)/N
+
+purity = 1 - WpowBand/Wpow
+
 
 %%
 
+arModel = ar(whist,2) %Ej klart. ?? Harmonic dist.
+arModelFilt = ar(wfilt,2)
+
+%%
+%parametric.
 figure;
-plot(wfilt)
+bode(arModel,arModelFilt) %peak of 0.532; 
+
+%non parametric
+figure;
+plot(n,abs(W),'--');
+hold on;
+plot(n,abs(Wfilt),'-.');
+
