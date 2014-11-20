@@ -4,15 +4,18 @@
 % The code shows how to read in a wav file that you have recorded, for example,
 % on your Android phone. 
 
+load('sentencej.mat')
+fSamp = 8000;
+
 %% first, we'll read in the pre-recorded wave file
 
 % We assume that the wave file has been recorded with a sampling frequency
 % of 8000Hz! 
 
-[y, fSamp] = audioread('fox2.wav'); % extract data and sampling frequency
+%[y, fSamp] = audioread('fox2.wav'); % extract data and sampling frequency
 
-fSamp % check if 8000Hz
-size(y) % if your recording is in stereo, you can remove one of the channels
+%fSamp % check if 8000Hz
+%size(y) % if your recording is in stereo, you can remove one of the channels
 
 % Some advice:
 % - Make sure that the volume of your recording device is reasonable. You
@@ -21,9 +24,11 @@ size(y) % if your recording is in stereo, you can remove one of the channels
 
 %% second, we'll listen to our recording
 
-sound(y,fSamp); % make sure that the quality of the recording is okay
+%sound(y,fSamp); % make sure that the quality of the recording is okay
 
 %% third, we'll have a look at the data
+
+y = sentencej;
 
 nSamp = size(y,1); % number of samples
 t = (0:nSamp-1)/fSamp; % time vector in seconds
@@ -35,7 +40,7 @@ ylabel('recorded signal') % axis description is important!
 
 
 %%
-y = y(0.5*8000:3.5*8000-1);
+y = y(1.5*8000:4.5*8000-1);
 
 nSamp = size(y,1); % number of samples
 t = (0:nSamp-1)/fSamp; % time vector in seconds
