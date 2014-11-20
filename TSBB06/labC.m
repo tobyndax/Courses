@@ -79,7 +79,7 @@ subplot(2,1,2);plot(c1)
 im = double(imread('Scalespace0.png'));
 figure(7);colormap(gray);imagesc(im);
 
-cert = double(rand(size(im)) > 0.97); imcert = im.*cert;
+cert = double(rand(size(im)) > 0.90); imcert = im.*cert;
 figure(8);colormap(gray);imagesc(imcert);
 
 x = ones(23,1)*(-11:11)

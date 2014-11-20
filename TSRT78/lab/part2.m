@@ -12,12 +12,18 @@ Ts  = 2;
 T = 1/fs;
 
 N = length(osound);
-n = [0:N-1];
-
-osound_e = osound(1:N/2);
-osound_v = osound(N/2+1:end); 
+n = 0:N-1;
+figure;
+subplot(211);
+plot(osound);
+%osound_d = detrend(osound);
+subplot(212);
+plot(osound_d);
+osound_e = osound_d(1:N/2);
+osound_v = osound_d(N/2+1:end); 
 
 t1  = ar(osound_e,1);
+t3  = ar(osound_e,3);
 t5  = ar(osound_e,5);
 t10 = ar(osound_e,10);
 t15 = ar(osound_e,15);
@@ -25,15 +31,17 @@ t20 = ar(osound_e,20);
 t25 = ar(osound_e,25);
 
 le(1)= sum(pe(osound_e,t1).^2)/(N/2);
-le(2)= sum(pe(osound_e,t5).^2)/(N/2);
-le(3)= sum(pe(osound_e,t10).^2)/(N/2);
-le(4)= sum(pe(osound_e,t15).^2)/(N/2);
-le(5)= sum(pe(osound_e,t20).^2)/(N/2);
-le(6)= sum(pe(osound_e,t25).^2)/(N/2);
+le(2)= sum(pe(osound_e,t3).^2)/(N/2);
+le(3)= sum(pe(osound_e,t5).^2)/(N/2);
+le(4)= sum(pe(osound_e,t10).^2)/(N/2);
+le(5)= sum(pe(osound_e,t15).^2)/(N/2);
+le(6)= sum(pe(osound_e,t20).^2)/(N/2);
+le(7)= sum(pe(osound_e,t25).^2)/(N/2);
 
 
 % validation 
 epv1  = pe(osound_v,t1);
+epv3  = pe(osound_v,t3);
 epv5  = pe(osound_v,t5);
 epv10 = pe(osound_v,t10);
 epv15 = pe(osound_v,t15);
@@ -41,46 +49,67 @@ epv20 = pe(osound_v,t20);
 epv25 =  pe(osound_v,t25);
 
 lv(1) = sum(epv1.^2)/(N/2);
-lv(2) = sum(epv5.^2)/(N/2);
-lv(3) = sum(epv10.^2)/(N/2);
-lv(4) = sum(epv15.^2)/(N/2);
-lv(5) = sum(epv20.^2)/(N/2);
-lv(6) = sum(epv25.^2)/(N/2);
+lv(2) = sum(epv3.^2)/(N/2);
+lv(3) = sum(epv5.^2)/(N/2);
+lv(4) = sum(epv10.^2)/(N/2);
+lv(5) = sum(epv15.^2)/(N/2);
+lv(6) = sum(epv20.^2)/(N/2);
+lv(7) = sum(epv25.^2)/(N/2);
 
 figure;
-plot(0:5:25,le,'-',0:5:25,lv,'--')
+plot(0:6,le,'-',0:6,lv,'--')
+%%
+%from above, order 3 seems to be enough however, covariance's verdict is
+%still out.
+close all;
 
-
-te = etfe(osound,30)
-bode(t10,':',t15,'--g',t20,'-.r',te,'-')
+te = etfe(osound_d,30);
+bode(t10,':',t15,'--g',t3,'-.r',te,'-')
 
 figure;
 
-r1 = covf(epv10,21);
-r2 = covf(epv15,21);
+r1 = covf(epv25,21);
+r2 = covf(epv3,21);
 r3 = covf(epv20,21);
 k = 0:20;
 
 plot(k,r1/r1(1),'-',k,r2/r2(1),'--',k,r3/r3(1),'-.') 
 
+%from this 15 seems to be required. 
 
-y = osound;
+%%
+close all;
+hold off;
+compare(osound_v,t3,1);
+hold on;
+%t3 seems good!!
+%%
 
+
+figure;
+y = osound_d;
+sys = t15;
 P = 75; %10 peaks average period in samples. 
 N = 16000;
 L = round(N/P);
-u = kron(ones(L,1),[1;zeros(P-1, 1)]);
-lambda = sum(osound.^2);
-scale = sqrt(lambda*L)
-u = u*scale;
+u = kron(ones(L,1),[1;zeros(P-1, 1)]); %pulse train input.
 
-sign = idsim(u,t10); %check which tn necessary
+e = filter(sys.a,1,u);
+r=covf(e,100);
+
+[val idx] = max(r(20:end));
+
+scale=sqrt(val)
+
+uhat = u*scale;
+
+sign = idsim(sys,u); %check which tn necessary
 
 Pyy = pwelch(y);
 
 plot(sign)
 %how should we scale. 
-sound(sign)
+soundsc(sign,fs)
 
 
 %%
@@ -124,7 +153,7 @@ figure;
 plot(0:5:25,le,'-',0:5:25,lv,'--')
 
 
-te = etfe(asound,30)
+te = etfe(asound,30);
 bode(t1,':',t5,'--g',t10,'-.r',te,'-')
 
 figure;
@@ -152,7 +181,7 @@ y = asound;
 
 P = 80; %10 peaks average period in samples. 
 N = 16000;
-L = N/P;
+L = round(N/P);
 u = 20*kron(ones(L,1),[1;zeros(P-1, 1)]);
 
 lambda = 1;
