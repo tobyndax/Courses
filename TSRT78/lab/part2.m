@@ -2,8 +2,8 @@ close all;
 addpath 'lab1Files/';
 addpath '../CourseLib/';
 
-run 'reada.m'; %load 2seconds of data into whist
-run 'reado.m'; %load 2seconds of data into whist
+run 'reada.m'; %load 2seconds of data into asound
+run 'reado.m'; %load 2seconds of data into osound
 
 %%
 
@@ -16,7 +16,7 @@ n = 0:N-1;
 figure;
 subplot(211);
 plot(osound);
-%osound_d = detrend(osound);
+osound_d = detrend(osound,'constant');
 subplot(212);
 plot(osound_d);
 osound_e = osound_d(1:N/2);
@@ -84,40 +84,41 @@ compare(osound_v,t3,1);
 hold on;
 %t3 seems good!!
 %%
-
-
 figure;
 y = osound_d;
 sys = t15;
-P = 75; %10 peaks average period in samples. 
+e = filter(sys.a,1,osound_d);
+r = covf(e,100);
+[val idx] = max(r(19:end));
+idx = idx+20;
+P = idx;
 N = 16000;
-L = round(N/P);
-u = kron(ones(L,1),[1;zeros(P-1, 1)]); %pulse train input.
+u = zeros(N,1); 
+for k=0:N-1
+    if(mod(k,P) == 0)
+         u(k+1,1) = 1;
+    end 
+end
+ehat = sqrt(val)*u;
+yhato = filter(1,sys.a,ehat);
 
-e = filter(sys.a,1,u);
-r=covf(e,100);
 
-[val idx] = max(r(20:end));
-
-scale=sqrt(val)
-
-uhat = u*scale;
-
-sign = idsim(sys,u); %check which tn necessary
 
 Pyy = pwelch(y);
 
-plot(sign)
+plot(yhato)
 %how should we scale. 
-soundsc(sign,fs)
+soundsc(yhato,fs)
 
 
 %%
 
 %order 5 is enough. 
 
-asound_e = asound(1:N/2);
-asound_v = asound(N/2+1:end); 
+asound_d = detrend(asound,'constant');
+
+asound_e = asound_d(1:N/2);
+asound_v = asound_d(N/2+1:end); 
 
 t1  = ar(asound_e,1);
 t5  = ar(asound_e,5);
@@ -150,10 +151,10 @@ lv(5) = sum(epv20.^2)/(N/2);
 lv(6) = sum(epv25.^2)/(N/2);
 
 figure;
-plot(0:5:25,le,'-',0:5:25,lv,'--')
+plot(0:5:30,le,'-',0:5:30 ,lv,'--')
 
 
-te = etfe(asound,30);
+te = etfe(asound_d,30);
 bode(t1,':',t5,'--g',t10,'-.r',te,'-')
 
 figure;
@@ -171,27 +172,39 @@ plot(k,r1/r1(1),'-',k,r2/r2(1),'--',k,r3/r3(1),'-.')
 bode(t10,'-.')
 
 figure;
-plot(2*pi/16000*n,abs(fft(asound)))
+plot(2*pi/16000*n,abs(fft(asound_d)))
 
 %%
 
 %Ar Simulation
 
-y = asound;
-
-P = 80; %10 peaks average period in samples. 
+y = asound_d;
+figure;
+sys = t15;
+e = filter(sys.a,1,asound_d);
+r = covf(e,100);
+[val idx] = max(r(19:end));
+idx = idx+20;
+P = idx;
 N = 16000;
-L = round(N/P);
-u = 20*kron(ones(L,1),[1;zeros(P-1, 1)]);
+u = zeros(N,1); 
+for k=0:N-1
+    if(mod(k,P) == 0)
+         u(k+1,1) = 1;
+    end 
+end
+ehat = sqrt(val)*u;
+yhata = filter(1,sys.a,ehat);
 
-lambda = 1;
 
-sign = idsim(u,t10)
 
 Pyy = pwelch(y);
+Pyy = pwelch(y);
 
-plot(sign)
+
+plot(yhata)
 %how should we scale. 
-%sound(sign) 
-max(asound)
-max(sign)
+soundsc(yhata,fs)
+pause;
+soundsc(yhato,fs)
+
