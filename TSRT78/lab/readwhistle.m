@@ -4,7 +4,7 @@
 % The code shows how to read in a wav file that you have recorded, for example,
 % on your Android phone. 
 
-load('asoundj.mat')
+load('whistj.mat')
 
 %% first, we'll read in the pre-recorded wave file
 

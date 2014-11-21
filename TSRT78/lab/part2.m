@@ -2,6 +2,8 @@ close all;
 addpath 'lab1Files/';
 
 run 'reada.m'; %load 2seconds of data into asound
+
+
 run 'reado.m'; %load 2seconds of data into osound
 
 %%
@@ -70,34 +72,43 @@ lv(7) = sum(epv20.^2)/Nv;
 lv(8) = sum(epv25.^2)/Nv;
 
 figure;
-plot(x,le,'-',x,lv,'--')
+plot(x,le,'-b',x,lv,'--r')
+xlabel('Order of system');ylabel('Mean of squared predicted error');
+legend('Estimation data','Validation data','Location','northeast');
+print -dpng Report/oLeLv.png
 
-close all;
-
+figure;
 te = etfe(osound_d,30);
 bode(t10,':',t15,'--g',t3,'-.r',te,'-')
+print -dpng oBode.png
 
 figure;
 
-r1 = covf(epv2,201);
-r2 = covf(epv3,201);
-r3 = covf(epv5,201);
-k = 0:200;
+r1 = covf(epv1,21);
+r2 = covf(epv5,21);
+r3 = covf(epv10,21);
+k = 0:20;
 
-plot(k,r1/r1(1),'-',k,r2/r2(1),'--',k,r3/r3(1),'-.') 
+plot(k,r1/r1(1),'--g',k,r2/r2(1),'-r',k,r3/r3(1),'-.b') 
+xlabel('k');ylabel('Covariance of k ');
+legend('Model order 1','Model order 5','Model order 10','Location','northeast');
+print -dpng Report/oCov.png
 
 %from this 2 seems to be required? 
-
 %%
 close all;
-compare(osound_v,t2,'--g',t5,'-.r',t10,':b',1);
+compare(osound_v,t2,'--g',t5,'-.r',t10,':b',t15,1);
 
+disp('Need manual save of figure here');
+pause;
 
 %t2 above 90%, not much better for higher values seems good!!
 %%
+close all;
+
 figure;
 y = osound_e;
-sys = t2;
+sys = t10;
 e = filter(sys.a,1,osound_e);
 r = covf(e,100);
 [val idx] = max(r(19:end));
@@ -113,8 +124,19 @@ end
 ehat = sqrt(val)*u;
 yhato = filter(1,sys.a,ehat);
 
-plot(yhato)
-soundsc(yhato,fs)
+
+nSamp = size(osound_d,1); % number of samples
+t = (0:nSamp-1)/fSamp; % time vector in seconds
+
+subplot(212);
+plot(t*pi,abs(fft(yhato)))
+xlabel('w');ylabel('Amplitude');title('FFT of reconstructed sound');
+subplot(211);
+plot(t*pi,abs(fft(osound_d)));
+xlabel('w');ylabel('Amplitude');title('FFT of detrended o-recording');
+print -dpng Report/oFFT.png
+
+%soundsc(yhato,fs)
 
 
 %%
@@ -160,11 +182,14 @@ lv(6) = sum(epv25.^2)/Nv;
 
 figure;
 plot(x,le,'-',x,lv,'--')
+xlabel('Order of system');ylabel('Mean of squared predicted error');
+legend('Estimation data','Validation data','Location','northeast');
+print -dpng Report/aLeLv.png
 
 figure;
 te = etfe(asound_d,30);
-bode(t1,':',t5,'--g',t10,'-.r',te,'-')
-
+bode(t5,':',t10,'--g',t15,'-.r',te,'-')
+print -dpng aBode.png
 figure;
 
 r1 = covf(epv10,21);
@@ -173,13 +198,16 @@ r3 = covf(epv20,21);
 k = 0:20;
 
 plot(k,r1/r1(1),'-',k,r2/r2(1),'--',k,r3/r3(1),'-.')
+xlabel('k');ylabel('Covariance of k ');
+legend('Model order 5','Model order 10','Model order 15','Location','northeast');
+print -dpng Report/aCov.png
 
 % t10 necessary
 
 %%
 close all;
 compare(asound_v,t5,'--g',t10,'-.r',t15,':b',1);
-
+pause;
 %%
 
 %Ar Simulation
@@ -202,13 +230,12 @@ end
 ehat = sqrt(val)*u;
 yhata = filter(1,sys.a,ehat);
 
-
-
-Pyy = pwelch(y);
-Pyy = pwelch(y);
-
-
-plot(yhata)
-soundsc(yhata,fs)
+subplot(212);
+plot(t*pi,abs(fft(yhata)))
+xlabel('w');ylabel('Amplitude');title('FFT of reconstructed sound');
+subplot(211);
+plot(t*pi,abs(fft(asound_d)));
+xlabel('w');ylabel('Amplitude');title('FFT of detrended a-recording');
+print -dpng Report/aFFT.png
 
 
