@@ -8,6 +8,7 @@ close all;
 N = 160;
 p = 10;
 Fs = 8000;
+T = 1/Fs;
 
 
 for k = 1:24000/N
@@ -25,7 +26,6 @@ for i = 0:(24000/N-1);
     [val idx] = max(r(19:end));
     idx = idx+19;
     P=idx;
-    N = 160;
     u = zeros(N,1);
     for k=0:N-1
         if(mod(k,P) == 0)
@@ -37,8 +37,19 @@ for i = 0:(24000/N-1);
     sound_recon =[sound_recon yhat'];
 end
 plot(r)
-soundsc(sound_recon',fSamp);
+%soundsc(sound_recon',fSamp);
+
+[b2, a2] = butter(5,4000/2*T,'low');
+
+y2 = filtfilt(b2,a2,sound_recon');
+
+soundsc(y2,fSamp)
+
 subplot(212);
 plot(sound_recon')
 subplot(211);
-plot(foxsound);
+plot(y2);
+
+
+
+
