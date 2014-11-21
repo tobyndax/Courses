@@ -30,12 +30,54 @@
 \newpage
 
 \section{Introduction}
+This is a laboration in the course "Digital Signal Processing", TSRT78.
+It consists of three parts, whistle, vowel and speech encoding as in GSM.
+
+The first assignment, whistle, is to try to whistle a sine and then
+investigate how pure the whistle actually is.
+
+In part two, vowel, the assignment is to model the sound of a vowel
+using an AR model. A proper order of the model was to be determined.
+The sound was then simulated using a suitable input signal and a
+model of proper order.
+
+The last assignment, speech encoding as in GSM, is to encode speech
+using GSM and investigate the result.
 
 \subsection{Notation}
-
+$f_s$ - sample frequency\\
+$N$ - number of samples
 
 \section{Whistle}
+Two seconds of a whistle was recorded at 8 $kHz$, $x[n]$, which gives 16000 samples.
+This sound was then filtered to get rid of unwanted frequencies, $x_{filt}[n]$.
+The energy of the filtered, $E_{filt}$, and unfiltered sound, $E_{tot}$,
+was caluculated in the time domain using equation~\ref{eq:Etimefilt}
+and~\ref{eq:Etime}. The energies was also calculated in the frequency
+domain using equation ~\ref{eq:Efeqfilt} and~\ref{eq:Efeq}.
+
+\begin{equation}
+  \label{eq:Etimefilt}
+  E_{filt} =\sum\limits_{n=-\infty}^{N-1} |x_{filt}[n]|^2
+\end{equation}
+
+\begin{equation}
+  \label{eq:Etime}
+  E_{tot} =\sum\limits_{n=-\infty}^{N-1} |x[n]|^2
+\end{equation}
+
+\begin{equation}
+  \label{eq:Efeqfilt}
+  E_{filt} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X_{filt}[k]|^2
+\end{equation}
+
+\begin{equation}
+  \label{eq:Efeq}
+  E_{tot} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X[k]|^2
+\end{equation}
+
 \subsection{Method}
+
 \subsection{Result and conclusion}
 
 \section{Vowel}
