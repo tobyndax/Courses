@@ -116,7 +116,14 @@ sound of the vowels they are used to simulate.
 \subsection{Results and conclusion}
 
 \section{Speech encoding as AR-model}
-
+The sentence "The clever fox surprised the rabbit" was recorded at
+8 $kHz$. This sound was the subject for a simplified GSM encoding.
+The sound was divided into 150 segments of 160 samples each. A
+AR model of order 8 was estimated for each segment. The sound was
+then simulated using a specific pulse train for each segment as
+input signal. Each pulse period, $D$, and amplitute, $A$, was
+estimated by taking the maximum of the covariance function of the
+residuals. Each pulse train is as long as a segment, 160 samples.
 
 \subsection{Results and conclusion}
 
