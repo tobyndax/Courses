@@ -8,20 +8,20 @@ run 'readfox.m'; %load data
 N=160;
 
 %%
-order = 10;
+order = 8;
 subplot(211);
 plot(abs(fft(foxsound)))
 fs = fSamp; %8kHz
 Ts  = 2; %the whole signal is 2 seconds long.
 T = 1/fs;
 
-fox_filt = detrend(foxsound,'constant');
+fox_filt = foxsound;
 subplot(212);
 plot(abs(fft(fox_filt)))
 
 %%
 for i = 0:24000/N-1;
-    sound_seg(i+1,:) = fox_filt(i*N+1:N*(i+1));
+    sound_seg(i+1,:) = detrend(fox_filt(i*N+1:N*(i+1)),'constant');
     sys = ar(sound_seg(i+1,:),order);
     r2 = sys.a;
     if max(abs(roots(sys.a))) >= 1
@@ -38,6 +38,7 @@ end
 
 sound_recon = []
 sound_recon_1 = []
+
 for i = 0:24000/N-1;
     e = filter(ar_seg(i+1,:),1,sound_seg(i+1,:));
     r = covf(e',100);
@@ -54,6 +55,10 @@ for i = 0:24000/N-1;
     yhat = filter(1,ar_seg(i+1,:),ehat);
     sound_recon_1 =[sound_recon_1 yhat'];
 end
+
+
+
+
 for i = 0:24000/N-1;
     e = filter(ar_seg(i+1,:),1,sound_seg(i+1,:));
     r = covf(e',100);

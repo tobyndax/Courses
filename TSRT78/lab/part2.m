@@ -79,8 +79,9 @@ print -dpng Report/oLeLv.png
 
 figure;
 te = etfe(osound_d,30);
-bode(t10,':',t15,'--g',t3,'-.r',te,'-')
-print -dpng oBode.png
+bode(t10,':',t15,'--g',t5,'-.r',te,'-')
+legend('10th order','15th order','5th order','Real data','Location','southwest')
+print -dpng Report/oBode.png
 
 figure;
 
@@ -100,7 +101,6 @@ close all;
 compare(osound_v,t2,'--g',t5,'-.r',t10,':b',t15,1);
 
 disp('Need manual save of figure here');
-pause;
 
 %t2 above 90%, not much better for higher values seems good!!
 %%
@@ -108,7 +108,7 @@ close all;
 
 figure;
 y = osound_e;
-sys = t10;
+sys = t5;
 e = filter(sys.a,1,osound_e);
 r = covf(e,100);
 [val idx] = max(r(19:end));
@@ -189,7 +189,8 @@ print -dpng Report/aLeLv.png
 figure;
 te = etfe(asound_d,30);
 bode(t5,':',t10,'--g',t15,'-.r',te,'-')
-print -dpng aBode.png
+legend('5th order','10th order','15th order','Real data','Location','southwest')
+print -dpng Report/aBode.png
 figure;
 
 r1 = covf(epv10,21);

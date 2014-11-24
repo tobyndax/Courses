@@ -75,7 +75,7 @@ $N$ - number of samples
 Two seconds of a whistle was recorded at 8 $kHz$, $x[n]$, which gives 16000 samples.
 This sound was then filtered to get rid of unwanted frequencies, $x_{filt}[n]$.
 The energy of the filtered, $E_{filt}$, and unfiltered sound, $E_{tot}$,
-was calculated in the time domain using equation~\ref{eq:Etimefilt}
+was caluculated in the time domain using equation~\ref{eq:Etimefilt}
 and~\ref{eq:Etime}. The energies was also calculated in the frequency
 domain using equation ~\ref{eq:Efeqfilt} and~\ref{eq:Efeq}.
 
@@ -91,17 +91,17 @@ domain using equation ~\ref{eq:Efeqfilt} and~\ref{eq:Efeq}.
 
 \begin{equation}
   \label{eq:Efeqfilt}
-  E_{Filt} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X_{filt}[k]|^2
+  E_{filt} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X_{filt}[k]|^2
 \end{equation}
 
 \begin{equation}
   \label{eq:Efeq}
-  E_{Tot} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X[k]|^2
+  E_{tot} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X[k]|^2
 \end{equation}
 
-The harmonic distortion of the whistle, $P$, was calculated using
-equation~\ref{eq:Purity}. It was calculated using energies from
-the time domain but also the frequency domain.
+The purity of the whistle, $P$, was calculated using equation~\ref{eq:Purity}.
+It was calculated using energies from the time domain but also the
+frequency domain.
 
 \begin{equation}
   \label{eq:Purity}
@@ -116,55 +116,88 @@ This was done using the spectrum of the non-parametric method
 as well as the spectrum of the parametric method.
 
 \subsection{Result and conclusion}
-The energies where calculated to $E_{tot}=1.1064*10^3$, $E_{filt}=1.1033e+03$,
-$E_{Tot}=1.1064*10^3$ and $E_{Filt}=1.1033*10^3$ which gives the harmonic distortion,
-$P= 0.0029$ in both cases.
-
-Harmonic distortion usint AR(2).
-
-The non-parametric spectrum of the whistle can be seen in figur
-and the parametric spectrum in figur. Both methods give the same peak
-at $0.96 rad/s$.
-\begin{figure}[!hp]
-
-    \begin{center}
-      \includegraphics[width=0.6\textwidth]{Wfilt}
-    \caption{Non-parametric spectrum \label{fig:Wfilt}}
-    \end{center}
-
-\end{figure}
-
-\begin{figure}[!hp]
-
-    \begin{center}
-      \includegraphics[width=0.6\textwidth]{WAR}
-    \caption{Parametric spectrum \label{fig:WAR}}
-    \end{center}
-
-\end{figure}
-
-
 
 \section{Vowel}
 Two seconds of sound of the two vowels a and o was recorded at
 8 $kHz$. These sounds were then used to compute AR models of
-different orders.Three validation methods are used to determine
-a proper order for the two AR models.
+different orders. To determine which order is required a couple of validation
+methods were applied. Firstly the mean of the squared prediction errors were compared for different
+orders. A distinct improvment can be noticed between order 1 and 2, with some
+significant improvement up untill order 5 for the o-sound, which can be seen in
+figure~\ref{fig:oLeLv}. For the a-sound, in figure~\ref{fig:aLeLv}, we see that
+ we get improvements of significance up until order 10.
 
-The first method is to compare model predictions with real data.
-By doing this a model order that is good enough can be choosen.
-Another method is to compare the non-parametric spectrum estimate
-with the spectrum of the AR models of different orders. A order
-that is good enough can again be choosen. The third and final
-validation method is to estimate the covatiance functions of the
-residuals and again choose a good enough model.
 
-Finally the two AR models of proper orders were simulated. Since
-the two sounds are periodic the simulation is done by using a
-pulse train as input. The pulse trains have the same period as the
-sound of the vowels they are used to simulate.
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{oLeLv}
+    \caption{O-sound mean squared prediction error \label{fig:oLeLv}}
+    \end{center}
+
+\end{figure}
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{aLeLv}
+    \caption{A-sound mean squared prediction error \label{fig:aLeLv}}
+    \end{center}
+
+\end{figure}
+
+The bodeplots for both the a-sound and the o-sound for the different orders of
+the systems are compared with bodeplots of the data. The a-sound presented in
+figure~\ref{fig:aBode}, shows that both order 10 and 15 follow the real data
+rather good. For o-sound, in figure~\ref{fig:oBode}, we see that already at
+5th order we get a decent fit.
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{aBode}
+    \caption{a-sound, bodeplot \label{fig:aBode}}
+    \end{center}
+
+\end{figure}
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{oBode}
+    \caption{o-sound, bodeplot \label{fig:oBode}}
+    \end{center}
+\end{figure}
 
 \subsection{Results and conclusion}
+For the o-sound AR(5) was used and for the a-sound AR(10) was used.
+The results are decent when listened to. You can easily discern the a from the o.
+Both the a-sound and the o-sound sound very monotone, with some improvements if
+the system orders are increased.
+Examining the fourier transform of the original signal and the reconstructed
+signal we see that the result does match decently, see figure~\ref{fig:ffto} and
+figure~\ref{fig:ffta}.
+
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{aFFT}
+    \caption{Fouriertransform of o-sound and reconstructed o-sound \label{fig:ffto}}
+    \end{center}
+
+\end{figure}
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{oFFT}
+    \caption{Fouriertransform of a-sound and reconstructed a-sound \label{fig:ffta}}
+    \end{center}
+
+\end{figure}
+
+
 
 \section{Speech encoding as AR-model}
 The sentence "The clever fox surprised the rabbit" was recorded at

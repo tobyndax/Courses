@@ -74,8 +74,6 @@ plot(n,abs(Wfilt),'-.');
 
 arModelFilt.NoiseVariance/arModel.NoiseVariance
 
-poles(arModel)
-
 %%
 
 
