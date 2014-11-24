@@ -52,10 +52,11 @@ whist_d = detrend(whist,'constant');
 
 whist_filt_d = detrend(wfilt,'constant');
 
-arModel = ar(whist,2) %Ej klart. ?? Harmonic dist.
-arModelFilt = ar(wfilt,2)
+arModel = ar(whist_d,2); %Ej klart. ?? Harmonic dist.
+arModelFilt = ar(whist_filt_d,2);
 
 %%
+close all;
 %parametric.
 figure;
 bode(arModel,arModelFilt) %peak of 0.96;
@@ -64,9 +65,19 @@ figure;
 bode(arModelFilt) %peak of 0.96;
 print -dpng Report/WAR.png
 
+%%
 %non parametric
 figure;
 plot(n,abs(W),'--r');
 hold on;
 plot(n,abs(Wfilt),'-.');
+
+arModelFilt.NoiseVariance/arModel.NoiseVariance
+
+poles(arModel)
+
+%%
+
+
+
 
