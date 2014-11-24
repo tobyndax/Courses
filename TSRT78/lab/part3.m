@@ -8,7 +8,7 @@ run 'readfox.m'; %load data
 N=160;
 
 %%
-order = 10;
+order = 8;
 subplot(211);
 plot(abs(fft(foxsound)))
 fs = fSamp; %8kHz
@@ -84,5 +84,6 @@ title('Recorded sound');xlabel('t');
 subplot(313);
 plot(t,sound_recon_1(1:24000)');
 title('Constant amplitude reconstructed sound')
+xlabel('Time (s)')
 
 print -dpng Report/recon.png
