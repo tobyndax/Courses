@@ -89,5 +89,6 @@ title('Recorded sound');xlabel('t');
 subplot(313);
 plot(t,sound_recon_1(1:24000)');
 title('Constant amplitude reconstructed sound')
+xlabel('Time (s)')
 
 print -dpng Report/recon.png

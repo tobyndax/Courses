@@ -116,6 +116,33 @@ This was done using the spectrum of the non-parametric method
 as well as the spectrum of the parametric method.
 
 \subsection{Result and conclusion}
+The energies where calculated to $E_{tot}=1.1064*10^3$, $E_{filt}=1.1033*10^3$,
+$E_{Tot}=1.1064*10^3$ and $E_{Filt}=1.1033*10^3$ which gives the harmonic distortion,
+$P= 0.0029$ in both cases. This is the dominant frequency.
+
+The non-parametric spectrum of the whistle can be seen in figure~\ref{fig:Wfilt}
+and the parametric spectrum in figur~\ref{fig:WAR}. Both methods give the same peak
+at $0.96 rad/s$.
+
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{Wfilt}
+    \caption{Non-parametric spectrum \label{fig:Wfilt}}
+    \end{center}
+
+\end{figure}
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{WAR}
+    \caption{Parametric spectrum \label{fig:WAR}}
+    \end{center}
+
+\end{figure}
+
 
 \section{Vowel}
 Two seconds of sound of the two vowels a and o was recorded at
@@ -151,6 +178,7 @@ the systems are compared with bodeplots of the data. The a-sound presented in
 figure~\ref{fig:aBode}, shows that both order 10 and 15 follow the real data
 rather good. For o-sound, in figure~\ref{fig:oBode}, we see that already at
 5th order we get a decent fit.
+
 
 \begin{figure}[!hp]
 
@@ -210,7 +238,33 @@ estimated by taking the maximum of the covariance function of the
 residuals. Each pulse train is as long as a segment, 160 samples.
 
 
-
 \subsection{Results and conclusion}
+The original sound, the reconstructed sound using a pulse train with
+dynamic amplitude and the reconstructed sound using a pulse train
+with constant amplitude one can be seen in figure~\ref{fig:recon}.
+
+\begin{figure}[!hp]
+
+    \begin{center}
+      \includegraphics[width=0.6\textwidth]{recon}
+    \caption{Parametric spectrum \label{fig:recon}}
+    \end{center}
+
+\end{figure}
+
+The original sound and the reconstructed sound using a pulse train
+with dynamic amplitude have the same major appearance as can be seen in
+figure~\ref{fig:recon}. The sound reconstructed with a pulse train with
+constant amplitude however is quite bad.
+
+By listening to the sound reconstructed using different model orders
+we draw the conclusion that orders lower than $8$ give unsatesfactory
+results and orders higher than $8$ give almost no improvement.
+
+For the reciever to reconstruct the sound all model coefficients,
+except for the one set to one, periodtime and segment amplitude.
+In our case it means that an AR(8) need to send at least 10 parameters
+for each segment down from 160. This gives a compression by a
+factor of 16.
 
 \end{document}
