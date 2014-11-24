@@ -1,10 +1,14 @@
 close all;
 addpath 'lab1Files/';
 
-run 'reada.m'; %load 2seconds of data into asound
+run 'reada.m';
+
+%The script reada.m simply reads a wav file into asound.
 
 
 run 'reado.m'; %load 2seconds of data into osound
+
+%The script reado.m simply reads a wav file into osound.
 
 %%
 close all; 
@@ -96,13 +100,12 @@ legend('Model order 1','Model order 5','Model order 10','Location','northeast');
 print -dpng Report/oCov.png
 
 %from this 2 seems to be required? 
-%%
-close all;
-compare(osound_v,t2,'--g',t5,'-.r',t10,':b',t15,1);
+% %%
+% close all;
+% compare(osound_v,t2,'--g',t5,'-.r',t10,':b',t15,1);
+% 
+% disp('Need manual save of figure here');
 
-disp('Need manual save of figure here');
-
-%t2 above 90%, not much better for higher values seems good!!
 %%
 close all;
 
@@ -135,8 +138,6 @@ subplot(211);
 plot(t*pi,abs(fft(osound_d)));
 xlabel('w');ylabel('Amplitude');title('FFT of detrended o-recording');
 print -dpng Report/oFFT.png
-
-%soundsc(yhato,fs)
 
 
 %%

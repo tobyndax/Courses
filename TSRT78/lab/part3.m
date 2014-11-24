@@ -3,7 +3,9 @@ clear all;
 clc; 
 addpath 'lab1Files/';
 
-run 'readfox.m'; %load data 
+run 'readfox.m';
+
+%The script readfox.m simply reads a wav file into foxsound.
 
 N=160;
 

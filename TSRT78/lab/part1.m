@@ -2,9 +2,13 @@ close all;
 addpath 'lab1Files/';
 addpath '../CourseLib/';
 
-run 'readwhistle.m'; %load 2seconds of data into whist
+run 'readwhistle.m';
+%The script readwhistle.m simply reads a wav file into whist.
+
 
 %%
+close all;
+
 fs = fSamp; %8kHz
 Ts  = 2; %the whole signal is 2 seconds long.
 T = 1/fs;
@@ -22,11 +26,15 @@ plot(w,abs(W));
 [b1, a1] = butter(10,[1000*2*T 1300*2*T],'bandpass');
 
 wfilt = filtfilt(b1,a1,whist);
-Wfilt = fft(wfilt);
+Wfilt = zeros(1,N);
+Wfilt(2275:2605) = W(2275:2605);
+Wfilt(13000:14000) = W(13000:14000);
 
 
 w=1/(N*T)*(0:N-1);
 ws=w*2*pi/8000;
+
+
 figure;
 plot(ws,abs(Wfilt)); %peak at 0.96
 xlabel('Frequency (rad/s)');ylabel('Amplitude');
@@ -64,6 +72,9 @@ bode(arModel,arModelFilt) %peak of 0.96;
 figure;
 bode(arModelFilt) %peak of 0.96;
 print -dpng Report/WAR.png
+
+%%
+1- abs(roots(arModel.a))
 
 %%
 %non parametric
