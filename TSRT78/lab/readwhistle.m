@@ -28,6 +28,7 @@ load('whistj.mat')
 %% third, we'll have a look at the data
 y = whistJens;
 nSamp = size(y,1); % number of samples
+fSamp = 8000;
 t = (0:nSamp-1)/fSamp; % time vector in seconds
 
 figure(1);clf();
