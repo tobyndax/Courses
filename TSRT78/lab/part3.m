@@ -23,14 +23,14 @@ plot(abs(fft(fox_filt)))
 for i = 0:24000/N-1;
     sound_seg(i+1,:) = fox_filt(i*N+1:N*(i+1));
     sys = ar(sound_seg(i+1,:),order);
-    ar_seg(i+1,:) = sys.a; 
-    check= abs(roots(sys.a))>1;
-    for k = 1:order
-        if(check(k))
-            disp('unstable');
-            %fix this. Somehow
-        end
+    r2 = sys.a;
+    if max(abs(roots(sys.a))) >= 1
+        % Print warning.
+        disp('Unstable roots!');
+        r2 = polystab(sys.a);
+        abs(roots(r2))
     end
+    ar_seg(i+1,:) =r2;
 end
 
 
@@ -44,7 +44,6 @@ for i = 0:24000/N-1;
     [val idx] = max(r(19:end));
     idx = idx+20;
     P = idx;
-    N = 160;
     u = zeros(N,1); 
     for k=0:N-1
         if(mod(k,P) == 0)
@@ -61,7 +60,6 @@ for i = 0:24000/N-1;
     [val idx] = max(r(19:end));
     idx = idx+20;
     P = idx;
-    N = 160;
     u = zeros(N,1); 
     for k=0:N-1
         if(mod(k,P) == 0)

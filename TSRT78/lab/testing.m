@@ -21,7 +21,7 @@ end
 sound_recon = []
 for i = 0:(24000/N-1);
     n = (i)*N+[1:N];
-    e = filter(a(i+1,:),1,foxsound(n));
+    e = filter(a(i+1,:),1,detrend(foxsound(n)));
     r = covf(e,100);
     [val idx] = max(r(19:end));
     idx = idx+19;
@@ -41,14 +41,14 @@ plot(r)
 
 [b2, a2] = butter(5,4000/2*T,'low');
 
-y2 = filtfilt(b2,a2,sound_recon');
+%y2 = filtfilt(b2,a2,sound_recon');
 
-soundsc(y2,fSamp)
+soundsc(sound_recon',fSamp)
 
 subplot(212);
 plot(sound_recon')
 subplot(211);
-plot(y2);
+plot(foxsound)
 
 
 
