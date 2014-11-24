@@ -75,7 +75,7 @@ $N$ - number of samples
 Two seconds of a whistle was recorded at 8 $kHz$, $x[n]$, which gives 16000 samples.
 This sound was then filtered to get rid of unwanted frequencies, $x_{filt}[n]$.
 The energy of the filtered, $E_{filt}$, and unfiltered sound, $E_{tot}$,
-was caluculated in the time domain using equation~\ref{eq:Etimefilt}
+was calculated in the time domain using equation~\ref{eq:Etimefilt}
 and~\ref{eq:Etime}. The energies was also calculated in the frequency
 domain using equation ~\ref{eq:Efeqfilt} and~\ref{eq:Efeq}.
 
@@ -126,7 +126,7 @@ The other purity measure, the one calculating the pole distances to the
 unit circle, was calculated to $0.7*10^{-3}$.
 
 The non-parametric spectrum of the whistle can be seen in figure~\ref{fig:Wfilt}
-and the parametric spectrum in figur~\ref{fig:WAR}. Both methods give the same peak
+and the parametric spectrum in figure~\ref{fig:WAR}. Both methods give the same peak
 at $0.96 rad/s$.
 
 
@@ -154,8 +154,8 @@ Two seconds of sound of the two vowels a and o was recorded at
 8 $kHz$. These sounds were then used to compute AR models of
 different orders. To determine which order is required a couple of validation
 methods were applied. Firstly the mean of the squared prediction errors were compared for different
-orders. A distinct improvment can be noticed between order 1 and 2, with some
-significant improvement up untill order 5 for the o-sound, which can be seen in
+orders. A distinct improvement can be noticed between order 1 and 2, with some
+significant improvement up until order 5 for the o-sound, which can be seen in
 figure~\ref{fig:oLeLv}. For the a-sound, in figure~\ref{fig:aLeLv}, we see that
  we get improvements of significance up until order 10.
 
@@ -178,8 +178,8 @@ figure~\ref{fig:oLeLv}. For the a-sound, in figure~\ref{fig:aLeLv}, we see that
 
 \end{figure}
 
-The bodeplots for both the a-sound and the o-sound for the different orders of
-the systems are compared with bodeplots of the data. The a-sound presented in
+The bode plots for both the a-sound and the o-sound for the different orders of
+the systems are compared with bode plots of the data. The a-sound presented in
 figure~\ref{fig:aBode}, shows that both order 10 and 15 follow the real data
 rather good. For o-sound, in figure~\ref{fig:oBode}, we see that already at
 5th order we get a decent fit.
@@ -189,7 +189,7 @@ rather good. For o-sound, in figure~\ref{fig:oBode}, we see that already at
 
     \begin{center}
       \includegraphics[width=0.8\textwidth]{aBode}
-    \caption{a-sound, bodeplot \label{fig:aBode}}
+    \caption{a-sound, bode-plot \label{fig:aBode}}
     \end{center}
 
 \end{figure}
@@ -198,7 +198,7 @@ rather good. For o-sound, in figure~\ref{fig:oBode}, we see that already at
 
     \begin{center}
       \includegraphics[width=0.8\textwidth]{oBode}
-    \caption{o-sound, bodeplot \label{fig:oBode}}
+    \caption{o-sound, bode-plot \label{fig:oBode}}
     \end{center}
 \end{figure}
 
@@ -207,7 +207,7 @@ For the o-sound AR(5) was used and for the a-sound AR(10) was used.
 The results are decent when listened to. You can easily discern the a from the o.
 Both the a-sound and the o-sound sound very monotone, with some improvements if
 the system orders are increased.
-Examining the fourier transform of the original signal and the reconstructed
+Examining the Fourier transform of the original signal and the reconstructed
 signal we see that the result does match decently, see figure~\ref{fig:ffto} and
 figure~\ref{fig:ffta}.
 
@@ -216,7 +216,7 @@ figure~\ref{fig:ffta}.
 
     \begin{center}
       \includegraphics[width=0.6\textwidth]{aFFT}
-    \caption{Fouriertransform of o-sound and reconstructed o-sound \label{fig:ffto}}
+    \caption{Fourier transform of o-sound and reconstructed o-sound \label{fig:ffto}}
     \end{center}
 
 \end{figure}
@@ -225,7 +225,7 @@ figure~\ref{fig:ffta}.
 
     \begin{center}
       \includegraphics[width=0.6\textwidth]{oFFT}
-    \caption{Fouriertransform of a-sound and reconstructed a-sound \label{fig:ffta}}
+    \caption{Fourier transform of a-sound and reconstructed a-sound \label{fig:ffta}}
     \end{center}
 
 \end{figure}
@@ -238,7 +238,7 @@ The sentence "The clever fox surprised the rabbit" was recorded at
 The sound was divided into 150 segments of 160 samples each. A
 AR model of order 8 was estimated for each segment. The sound was
 then simulated using a specific pulse train for each segment as
-input signal. Each pulse period, $D$, and amplitute, $A$, was
+input signal. Each pulse period, $D$, and amplitude, $A$, was
 estimated by taking the maximum of the covariance function of the
 residuals. Each pulse train is as long as a segment, 160 samples.
 
@@ -263,11 +263,11 @@ figure~\ref{fig:recon}. The sound reconstructed with a pulse train with
 constant amplitude however is quite bad.
 
 By listening to the sound reconstructed using different model orders
-we draw the conclusion that orders lower than $8$ give unsatesfactory
+we draw the conclusion that orders lower than $8$ give unsatisfactory
 results and orders higher than $8$ give almost no improvement.
 
-For the reciever to reconstruct the sound all model coefficients,
-except for the one set to one, periodtime and segment amplitude.
+For the receiver to reconstruct the sound all model coefficients,
+except for the one set to one, period time and segment amplitude.
 In our case it means that an AR(8) need to send at least 10 parameters
 for each segment down from 160. This gives a compression by a
 factor of 16.
@@ -275,8 +275,6 @@ factor of 16.
 \newpage
 
 \section*{Matlab Code}
-
-
 
 \subsection*{Part 1}
 \lstinputlisting{../part1.m}
