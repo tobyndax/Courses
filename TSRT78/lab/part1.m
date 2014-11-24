@@ -22,12 +22,16 @@ plot(w,abs(W));
 [b1, a1] = butter(10,[1000*2*T 1300*2*T],'bandpass');
 
 wfilt = filtfilt(b1,a1,whist);
-
 Wfilt = fft(wfilt);
-w=1/(N*T)*(0:N-1);
 
+
+w=1/(N*T)*(0:N-1);
+ws=w*2*pi/8000;
 figure;
-plot(w,abs(Wfilt));
+plot(ws,abs(Wfilt)); %peak at 0.96
+xlabel('Frequency (rad/s)');ylabel('Amplitude');
+print -dpng Report/Wfilt.png
+
 %This is power. We want energy. Drop a N, mayhaps?
 wpow = sum(whist.^2)
 wfiltpow = sum(wfilt.^2)
@@ -54,7 +58,11 @@ arModelFilt = ar(wfilt,2)
 %%
 %parametric.
 figure;
-bode(arModel,arModelFilt) %peak of 0.532; 
+bode(arModel,arModelFilt) %peak of 0.96;
+
+figure;
+bode(arModelFilt) %peak of 0.96;
+print -dpng Report/WAR.png
 
 %non parametric
 figure;
