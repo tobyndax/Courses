@@ -56,15 +56,15 @@
 This is a laboration in the course "Digital Signal Processing", TSRT78.
 It consists of three parts, whistle, vowel and speech encoding as in GSM.
 
-The first assignment, whistle, is to try to whistle a sine and then
+The first assignment, whistle, was to try to whistle a sine and then
 investigate how pure the whistle actually is.
 
-In part two, vowel, the assignment is to model the sound of a vowel
+In part two, vowel, the assignment was to model the sound of a vowel
 using an AR model. A proper order of the model was to be determined.
 The sound was then simulated using a suitable input signal and a
 model of proper order.
 
-The last assignment, speech encoding as in GSM, is to encode speech
+The last assignment, speech encoding as in GSM, was to encode speech
 using GSM and investigate the result.
 
 \section{Whistle}
@@ -87,12 +87,12 @@ domain using equation ~\ref{eq:Efeqfilt} and~\ref{eq:Efeq}.
 
 \begin{equation}
   \label{eq:Efeqfilt}
-  E_{filt} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X_{filt}[k]|^2
+  E_{FILT} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X_{FILT}[k]|^2
 \end{equation}
 
 \begin{equation}
   \label{eq:Efeq}
-  E_{tot} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X[k]|^2
+  E_{TOT} =\frac{1}{N}\sum\limits_{k=0}^{N-1} |X[k]|^2
 \end{equation}
 
 The purity of the whistle, $P$, was calculated using equation~\ref{eq:Purity}.
@@ -105,7 +105,7 @@ frequency domain.
 \end{equation}
 
 An AR model of order two, AR(2), was then calculated. A purity measure
-is computed by calculating the distance from each pole to the unit
+was computed by calculating the distance from each pole to the unit
 circle. This is a good purity measure since a pure sinusoid have
 two poles on the unit circle.
 
@@ -115,17 +115,17 @@ as well as the spectrum of the parametric method.
 
 \subsection{Result and conclusion}
 The energies where calculated to $E_{tot}=1.1064*10^3$, $E_{filt}=1.1033*10^3$,
-$E_{Tot}=1.1064*10^3$ and $E_{Filt}=1.1043*10^3$ which gives the harmonic distortion,
+$E_{TOT}=1.1064*10^3$ and $E_{FILT}=1.1043*10^3$ which gives the harmonic distortion,
 $P=0.0029$ if calculated using values from the time domain and $P=0.0019$
 when using values from the frequency domain. Both of these values are close to
 zero which indicates a pure whistle. The other purity measure, the
 one calculating the pole distances to the unit circle, was calculated
-to $0.7*10^{-3}$. This one is also close to zero which ones again indicates a
+to $0.7*10^{-3}$. This one was also close to zero which ones again indicates a
 pure whistle.
 
 The non-parametric spectrum of the whistle can be seen in figure~\ref{fig:Wfilt}
 and the parametric spectrum in figure~\ref{fig:WAR}. Both methods give the same peak
-at $0.96 rad/s$. This is the dominant frequency.
+at $0.96~rad/s$. This is the dominant frequency.
 
 
 \begin{figure}[!hp]
@@ -177,7 +177,7 @@ figure~\ref{fig:oLeLv}. For the a-sound, in figure~\ref{fig:aLeLv}, we see that
 \end{figure}
 
 The bode plots for both the a-sound and the o-sound for the different orders of
-the systems are compared with bode plots of the data. The a-sound presented in
+the systems were compared with bode plots of the data. The a-sound presented in
 figure~\ref{fig:aBode}, shows that both order 10 and 15 follow the real data
 rather good. For o-sound, in figure~\ref{fig:oBode}, we see that already at
 5th order we get a decent fit.
@@ -230,7 +230,7 @@ figure~\ref{fig:ffta}.
 
 
 
-\section{Speech encoding as AR-model}
+\section{Speech encoding as in GSM}
 The sentence "The clever fox surprised the rabbit" was recorded at
 8 $kHz$. This sound was the subject for a simplified GSM encoding.
 The sound was divided into 150 segments of 160 samples each. A
@@ -238,7 +238,7 @@ AR model of order 8 was estimated for each segment. The sound was
 then simulated using a specific pulse train for each segment as
 input signal. Each pulse period, $D$, and amplitude, $A$, was
 estimated by taking the maximum of the covariance function of the
-residuals. Each pulse train is as long as a segment, 160 samples.
+residuals. Each pulse train was as long as a segment, 160 samples.
 
 
 \subsection{Results and conclusion}
@@ -258,15 +258,15 @@ with constant amplitude one can be seen in figure~\ref{fig:recon}.
 The original sound and the reconstructed sound using a pulse train
 with dynamic amplitude have the same major appearance as can be seen in
 figure~\ref{fig:recon}. The sound reconstructed with a pulse train with
-constant amplitude however is quite bad.
+constant amplitude however was quite bad.
 
 By listening to the sound reconstructed using different model orders
-we draw the conclusion that orders lower than $8$ give unsatisfactory
-results and orders higher than $8$ give almost no improvement.
+we drew the conclusion that orders lower than $8$ gave unsatisfactory
+results and orders higher than $8$ gave almost no improvement.
 
 For the receiver to reconstruct the sound all model coefficients,
-except for the one set to one, period time and segment amplitude.
-In our case it means that an AR(8) need to send at least 10 parameters
+except for the one set to one, period time and segment amplitude are needed.
+In our case it means that an AR(8) model need to send at least 10 parameters
 for each segment down from 160. This gives a compression by a
 factor of 16.
 
