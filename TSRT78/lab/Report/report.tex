@@ -157,10 +157,15 @@ Two seconds of sound of the two vowels a and o was recorded at
 8 $kHz$. These sounds were then used to compute AR models of
 different orders.
 The reconstruction of the sound was performed by using a pulsetrain with period,
-D and amplitude A, which was estimated by taking the maximum of the covariance function
-of the residuals. See Part 2 line 220 - 234. The sound can be played by using the
- matlab command soundsc(sigvar,fSamp), where sigvar is the signal to be played
- and fSamp is the sampling frequency.
+$D$ and amplitude $A$, which was estimated by finding the first maximum, after
+19 samples, of the covariance function of the residuals, here it was important to
+exclude the initial samples since they contain a large spike and the
+next spike is the actual result that was sought. $A$ is set to the
+amplitude of the maximum and $D$ is set to the lag of the maximum
+in relation to the original vector. See Part 2 line 220 - 234.
+The sound can be played by using the
+matlab command soundsc(sigvar,fSamp), where sigvar is the signal to be played
+and fSamp is the sampling frequency.
 To determine which order is required a couple of validation
 methods were applied. Firstly the mean of the squared prediction errors were compared for different
 orders. A distinct improvement can be noticed between order 1 and 2, with some
