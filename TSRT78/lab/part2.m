@@ -35,13 +35,13 @@ osound_e = osound_d(1:floor(2*N/3));
 osound_v = osound_d(floor(2*N/3)+1:end); 
 
 
-x = [1 2 3 5 10 15 20 25]
+x = [1 2 5 6 8 15 20 25]
 
 t1  = ar(osound_e,1);
 t2  = ar(osound_e,2);
-t3  = ar(osound_e,3);
-t5  = ar(osound_e,5);
-t10 = ar(osound_e,10);
+t3  = ar(osound_e,5);
+t5  = ar(osound_e,6);
+t10 = ar(osound_e,8);
 t15 = ar(osound_e,15);
 t20 = ar(osound_e,20);
 t25 = ar(osound_e,25);

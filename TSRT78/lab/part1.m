@@ -66,11 +66,10 @@ arModelFilt = ar(whist_filt_d,2);
 %%
 close all;
 %parametric.
+s_nonpar=etfe(whist_d,1000);
 figure;
-bode(arModel,arModelFilt) %peak of 0.96;
-
-figure;
-bode(arModelFilt) %peak of 0.96;
+bode(arModelFilt,s_nonpar) %peak of 0.96;
+legend('AR-model','Detrended Whistle');
 print -dpng Report/WAR.png
 
 %%
@@ -78,10 +77,9 @@ print -dpng Report/WAR.png
 
 %%
 %non parametric
-figure;
-plot(n,abs(W),'--r');
-hold on;
-plot(n,abs(Wfilt),'-.');
+[H,W]=freqz(1,arModelFilt.a,16000);
+figure(5); plot(W,abs(H),'r'); hold on;
+
 
 arModelFilt.NoiseVariance/arModel.NoiseVariance
 

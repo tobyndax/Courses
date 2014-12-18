@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{listings}
+\usepackage[section]{placeins}
+\usepackage{flafter}
 \usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
 \definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
 \definecolor{mylilas}{RGB}{170,55,241}
@@ -21,10 +23,10 @@
 \title{Fundamental Signal Processing\\
 \emph{TSRT78}}
 
-%\author{David Habrman \\ davha227, 920908-2412\\
-%Jens Edhammer \\ jened502, 920128-5112 }
+\author{David Habrman \\ davha227, 920908-2412\\
+Jens Edhammer \\ jened502, 920128-5112 }
 
-%\date{\today}
+\date{\today}
 
 \begin{document}
 
@@ -69,6 +71,8 @@ using GSM and investigate the result.
 
 \section{Whistle}
 Two seconds of a whistle was recorded at 8 $kHz$, $x[n]$, which gives 16000 samples.
+By studying the Fourier transform of the signal the dominating frequency can be
+determined.
 This sound was then filtered to get rid of unwanted frequencies, $x_{filt}[n]$.
 The energy of the filtered, $E_{filt}$, and unfiltered sound, $E_{tot}$,
 was calculated in the time domain using equation~\ref{eq:Etimefilt}
@@ -131,7 +135,7 @@ at $0.96~rad/s$. This is the dominant frequency.
 \begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{Wfilt}
+      \includegraphics[width=0.8\textwidth]{Wfilt}
     \caption{Non-parametric spectrum \label{fig:Wfilt}}
     \end{center}
 
@@ -140,17 +144,24 @@ at $0.96~rad/s$. This is the dominant frequency.
 \begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{WAR}
+      \includegraphics[width=0.8\textwidth]{WAR}
     \caption{Parametric spectrum \label{fig:WAR}}
     \end{center}
 
 \end{figure}
 
+\clearpage
 
 \section{Vowel}
 Two seconds of sound of the two vowels a and o was recorded at
 8 $kHz$. These sounds were then used to compute AR models of
-different orders. To determine which order is required a couple of validation
+different orders.
+The reconstruction of the sound was performed by using a pulsetrain with period,
+D and amplitude A, which was estimated by taking the maximum of the covariance function
+of the residuals. See Part 2 line 220 - 234. The sound can be played by using the
+ matlab command soundsc(sigvar,fSamp), where sigvar is the signal to be played
+ and fSamp is the sampling frequency.
+To determine which order is required a couple of validation
 methods were applied. Firstly the mean of the squared prediction errors were compared for different
 orders. A distinct improvement can be noticed between order 1 and 2, with some
 significant improvement up until order 5 for the o-sound, which can be seen in
@@ -161,7 +172,7 @@ figure~\ref{fig:oLeLv}. For the a-sound, in figure~\ref{fig:aLeLv}, we see that
 \begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{oLeLv}
+      \includegraphics[width=0.8\textwidth]{oLeLv}
     \caption{O-sound mean squared prediction error \label{fig:oLeLv}}
     \end{center}
 
@@ -170,7 +181,7 @@ figure~\ref{fig:oLeLv}. For the a-sound, in figure~\ref{fig:aLeLv}, we see that
 \begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{aLeLv}
+      \includegraphics[width=0.8\textwidth]{aLeLv}
     \caption{A-sound mean squared prediction error \label{fig:aLeLv}}
     \end{center}
 
@@ -205,6 +216,7 @@ For the o-sound AR(5) was used and for the a-sound AR(10) was used.
 The results are decent when listened to. You can easily discern the a from the o.
 Both the a-sound and the o-sound sound very monotone, with some improvements if
 the system orders are increased.
+A much too high order might introduce distortion again since it is a parametric method.
 Examining the Fourier transform of the original signal and the reconstructed
 signal we see that the result does match decently, see figure~\ref{fig:ffto} and
 figure~\ref{fig:ffta}.
@@ -213,7 +225,7 @@ figure~\ref{fig:ffta}.
 \begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{aFFT}
+      \includegraphics[width=0.8\textwidth]{aFFT}
     \caption{Fourier transform of o-sound and reconstructed o-sound \label{fig:ffto}}
     \end{center}
 
@@ -222,12 +234,13 @@ figure~\ref{fig:ffta}.
 \begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{oFFT}
+      \includegraphics[width=0.8\textwidth]{oFFT}
     \caption{Fourier transform of a-sound and reconstructed a-sound \label{fig:ffta}}
     \end{center}
 
 \end{figure}
 
+\clearpage
 
 
 \section{Speech encoding as in GSM}
@@ -237,11 +250,16 @@ The sound was divided into 150 segments of 160 samples each. A
 AR model of order 8 was estimated for each segment. The sound was
 then simulated using a specific pulse train for each segment as
 input signal. Each pulse period, $D$, and amplitude, $A$, was
-estimated by finding the first maximum, after 19 samples, of
-the covariance function of the residuals. $A$ is set to the
-amplitude of the maximum and $D$ is set to the lag of the maximum
-in relation to the original vector. Each pulse train was as long as
-a segment, 160 samples.
+estimated by taking the maximum of the covariance function of the
+residuals, here it was important to exclude the initial samples since they contain
+a large spike and the next spike is the actual result that was sought.
+Each pulse train was as long as a segment, 160 samples.
+The sound can be played by using the matlab command soundsc(sigvar,fSamp),
+where sigvar is the signal to be played and fSamp is the sampling frequency.
+In addition a pulse train of only ones were also tested for comparisons.
+The code in matlab also needed to take care of unstable poles. This was done by
+mirroring the poles that were outside the unit circle in the unit circle.
+
 
 
 \subsection{Results and conclusion}
@@ -252,8 +270,8 @@ with constant amplitude one can be seen in figure~\ref{fig:recon}.
 \begin{figure}[!hp]
 
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{recon}
-    \caption{Parametric spectrum \label{fig:recon}}
+      \includegraphics[width=0.8\textwidth]{recon}
+    \caption{Original and reconstructed sound\label{fig:recon}}
     \end{center}
 
 \end{figure}
@@ -266,6 +284,7 @@ constant amplitude however was quite bad.
 By listening to the sound reconstructed using different model orders
 we drew the conclusion that orders lower than $8$ gave unsatisfactory
 results and orders higher than $8$ gave almost no improvement.
+Even higher order might even lead to distortions in the reconstruction.
 
 For the receiver to reconstruct the sound all model coefficients,
 except for the one set to one, period time and segment amplitude are needed.
@@ -274,7 +293,7 @@ for each segment down from 160. This gives a compression by a
 factor of 16.
 
 \newpage
-
+\clearpage
 \section*{Matlab Code}
 
 \subsection*{Part 1}
