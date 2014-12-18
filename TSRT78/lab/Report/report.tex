@@ -23,10 +23,10 @@
 \title{Fundamental Signal Processing\\
 \emph{TSRT78}}
 
-%\author{David Habrman \\ davha227, 920908-2412\\
-%Jens Edhammer \\ jened502, 920128-5112 }
+\author{David Habrman \\ davha227, 920908-2412\\
+Jens Edhammer \\ jened502, 920128-5112 }
 
-%\date{\today}
+\date{\today}
 
 \begin{document}
 
@@ -159,7 +159,7 @@ different orders.
 The reconstruction of the sound was performed by using a pulsetrain with period,
 D and amplitude A, which was estimated by taking the maximum of the covariance function
 of the residuals. See Part 2 line 220 - 234. The sound can be played by using the
- matlab command soundsc(sig_var,fSamp), where sig_var is the signal to be played
+ matlab command soundsc(sigvar,fSamp), where sigvar is the signal to be played
  and fSamp is the sampling frequency.
 To determine which order is required a couple of validation
 methods were applied. Firstly the mean of the squared prediction errors were compared for different
@@ -254,8 +254,8 @@ estimated by taking the maximum of the covariance function of the
 residuals, here it was important to exclude the initial samples since they contain
 a large spike and the next spike is the actual result that was sought.
 Each pulse train was as long as a segment, 160 samples.
-The sound can be played by using the matlab command soundsc(sig_var,fSamp),
-where sig_var is the signal to be played and fSamp is the sampling frequency.
+The sound can be played by using the matlab command soundsc(sigvar,fSamp),
+where sigvar is the signal to be played and fSamp is the sampling frequency.
 In addition a pulse train of only ones were also tested for comparisons.
 The code in matlab also needed to take care of unstable poles. This was done by
 mirroring the poles that were outside the unit circle in the unit circle.
