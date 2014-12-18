@@ -250,15 +250,18 @@ The sound was divided into 150 segments of 160 samples each. A
 AR model of order 8 was estimated for each segment. The sound was
 then simulated using a specific pulse train for each segment as
 input signal. Each pulse period, $D$, and amplitude, $A$, was
-estimated by taking the maximum of the covariance function of the
-residuals, here it was important to exclude the initial samples since they contain
-a large spike and the next spike is the actual result that was sought.
-Each pulse train was as long as a segment, 160 samples.
-The sound can be played by using the matlab command soundsc(sigvar,fSamp),
-where sigvar is the signal to be played and fSamp is the sampling frequency.
-In addition a pulse train of only ones were also tested for comparisons.
-The code in matlab also needed to take care of unstable poles. This was done by
-mirroring the poles that were outside the unit circle in the unit circle.
+estimated by finding the first maximum, after 19 samples, of
+the covariance function of the residuals, here it was important to
+exclude the initial samples since they contain a large spike and the
+next spike is the actual result that was sought. $A$ is set to the
+amplitude of the maximum and $D$ is set to the lag of the maximum
+in relation to the original vector. Each pulse train was as long as a
+segment, 160 samples. The sound can be played by using the matlab command
+soundsc(sigvar,fSamp), where sigvar is the signal to be played and fSamp
+is the sampling frequency. In addition a pulse train of only ones were
+also tested for comparisons. The code in matlab also needed to take
+care of unstable poles. This was done by mirroring the poles that were
+outside the unit circle in the unit circle.
 
 
 
