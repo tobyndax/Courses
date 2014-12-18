@@ -237,8 +237,11 @@ The sound was divided into 150 segments of 160 samples each. A
 AR model of order 8 was estimated for each segment. The sound was
 then simulated using a specific pulse train for each segment as
 input signal. Each pulse period, $D$, and amplitude, $A$, was
-estimated by taking the maximum of the covariance function of the
-residuals. Each pulse train was as long as a segment, 160 samples.
+estimated by finding the first maximum, after 19 samples, of
+the covariance function of the residuals. $A$ is set to the
+amplitude of the maximum and $D$ is set to the lag of the maximum
+in relation to the original vector. Each pulse train was as long as
+a segment, 160 samples.
 
 
 \subsection{Results and conclusion}
